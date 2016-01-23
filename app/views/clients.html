@@ -1,0 +1,12 @@
+<div class="user-container" id="top">
+  <ul class="clients">
+    <li ng-repeat="c in clients track by $index">
+      <div class="row">
+        <div class="col-md-8">
+          <a ng-href="#/clients/{{c.idClient}}"><h4>{{c.nom}} {{c.prenom}}</h4></a>
+          <span class="glyphicon glyphicon-calendar"></span> <span class="date" ng-bind="c.date_naissance | date:'dd/MM/yyyy'"></span><br/>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,7 @@
+<div ng-app="angularApp" ng-controller="StationsCtrl">
+  <div id="map"></div>
+
+  <div class="list-group" ng-repeat="marker in markers | orderBy : 'title'">
+    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+  </div>
+</div>
