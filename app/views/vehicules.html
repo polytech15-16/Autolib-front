@@ -1,0 +1,20 @@
+<div ng-app="angularApp" ng-controller="VehiculesCtrl">
+  <div id="map"></div>
+
+ <!--  <div class="list-group" ng-repeat="marker in markers | orderBy : 'title'">
+    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+  </div> -->
+
+  <div class="list-group" ng-repeat="info in infos">
+  	<div id="{{info.id}}" class="well vehicule_info" hidden>
+    <p>
+    	id : {{info.id}} </br>
+    	RFID : {{info.RFID}} </br>
+    	Disponibilite : {{info.Disponibilite}} </br>
+    	Categorie : {{info.categorie}} </br>
+    	Type Vehicule : {{info.type_vehicule}} </br>
+    	Etat batterie : {{info.batterie}} </br>
+    </p>
+	</div>
+  </div>
+</div>

@@ -29,6 +29,11 @@ angular.module('angularApp', [
         controller: 'StationsCtrl',
         controllerAs: 'stations'
       })
+      .when('/vehicules', {
+        templateUrl: 'views/vehicules.html',
+        controller: 'VehiculesCtrl',
+        controllerAs: 'vehicules'
+      })
       .when('/clients', {
         templateUrl: 'views/clients.html',
         controller: 'ClientsCtrl',
