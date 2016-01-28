@@ -1,8 +1,15 @@
 <div ng-app="angularApp" ng-controller="StationsCtrl">
   <div id="map"></div>
 
+  <div class="legend">
+    <p><img ng-src="images/marker1.png" alt="Places disponibles"/>Des places sont disponibles</p>
+    <p><img ng-src="images/marker2.png" alt="Places disponibles"/>Aucune place n'est disponible</p>
+  </div>
+
+
   <h1>Liste des stations</h1>
   <label>Rechercher : <input ng-model="searchText"></label>
+
   <div class="list-group" ng-repeat="marker in markers |  filter:{content: searchText} | orderBy : 'title' ">
     <div class="station well">
       <h3><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></h3>

@@ -101,3 +101,11 @@ h2 {
   padding: 10px;
   margin-top: 20px;
 }
+
+.legend{
+  margin: 10px;
+}
+
+.legend img{
+  margin-right: 10px;
+}
