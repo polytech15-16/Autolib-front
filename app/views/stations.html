@@ -1,7 +1,21 @@
 <div ng-app="angularApp" ng-controller="StationsCtrl">
   <div id="map"></div>
 
-  <div class="list-group" ng-repeat="marker in markers | orderBy : 'title'">
-    <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a>
+  <h1>Liste des stations</h1>
+  <label>Rechercher : <input ng-model="searchText"></label>
+  <div class="list-group" ng-repeat="marker in markers |  filter:{content: searchText} | orderBy : 'title' ">
+    <div class="station well">
+      <h3><a href="#" ng-click="openInfoWindow($event, marker)">{{marker.title}}</a></h3>
+      {{marker.station.adresse}}<br>
+      {{marker.station.code_postal}} {{marker.station.ville}}
+      <hr>
+      <h4>Bornes</h4>
+
+      <div class="list-group" ng-repeat="borne in marker.station.Bornes | orderBy : 'etatBorne'">
+        <li ng-if="!borne.etatBorne">{{borne.idBorne}} : Occupée <a href="">Véhicule ({{borne.idVehicule}})</a></li>
+        <li ng-if="borne.etatBorne">{{borne.idBorne}} : Libre</li>
+
+      </div>
+    </div>
   </div>
 </div>
