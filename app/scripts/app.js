@@ -9,14 +9,15 @@
  * Main module of the application.
  */
 angular.module('angularApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch',
-	'ui.bootstrap'
-  ])
+  'ngAnimate',
+  'ngCookies',
+  'ngResource',
+  'ngRoute',
+  'ngSanitize',
+  'ngTouch',
+  'ui.bootstrap',
+  'ngGeolocation'
+])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
