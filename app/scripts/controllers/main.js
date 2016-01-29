@@ -8,6 +8,6 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-    .controller('MainCtrl', function ($scope, $location) {
+  .controller('MainCtrl', function ($scope, $location) {
 
-    });
+  });

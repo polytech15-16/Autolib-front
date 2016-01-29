@@ -41,6 +41,7 @@
 
         <ul class="nav navbar-nav">
           <li class=""><a href="#/">Home</a></li>
+          <li><a ng-href="#/user/login">Connection</a></li>
           <li><a ng-href="#/clients">Clients</a></li>
           <li><a ng-href="#/stations">Stations</a></li>
           <li><a ng-href="#/vehicules">Vehicules</a></li>
@@ -100,13 +101,14 @@
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
+<script src="scripts/services/servicelogin.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <script src="scripts/controllers/stations.js"></script>
 <script src="scripts/controllers/vehicules.js"></script>
 <script src="scripts/controllers/clients.js"></script>
 <script src="scripts/controllers/user/login.js"></script>
 <script src="scripts/controllers/user/register.js"></script>
-<script src="scripts/services/servicelogin.js"></script>
+
 <!-- endbuild -->
 </body>
 </html>
