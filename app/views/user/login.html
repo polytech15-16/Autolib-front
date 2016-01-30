@@ -1,17 +1,21 @@
 <div ng-app="angularApp" ng-controller="UserLoginCtrl">
   <h1>Connection</h1>
 
-  <form ng-show="!isAuthed()" novalidate class="simple-form">
-    Login: <input type="text" ng-model="user.login" placeholder="login"/><br>
-    Password: <input type="password" ng-model="user.password" placeholder="password"/><br/>
-    <input type="button" ng-click="reset()" value="Reset"/>
-    <input type="submit" ng-click="login()" value="Save"/>
-  </form>
+  <div class="row">
+    <div class="col-md-6">
 
-
-  <div ng-show="isAuthed()">
-    <p>Vous êtes connecté !</p>
-    <input type="button" ng-click="logout()" value="Deconnection"/>
+      <form ng-show="!isAuthed()" novalidate class="simple-form">
+        <label>Login:</label>
+        <input class="form-control" type="text" ng-model="user.login" placeholder="login"/><br>
+        <label> Password:</label>
+        <input class="form-control" type="password" ng-model="user.password" placeholder="password"/><br/>
+        <input class="btn btn-danger" type="button" ng-click="reset()" value="Reset"/>
+        <input class="btn btn-info" type="submit" ng-click="login()" value="Save"/>
+      </form>
+      <div ng-show="isAuthed()">
+        <p>Vous êtes connecté !</p>
+        <input class="btn btn-info" type="button" ng-click="logout()" value="Deconnection"/>
+      </div>
+    </div>
   </div>
-
 </div>

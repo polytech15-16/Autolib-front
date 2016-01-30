@@ -1,1 +1,39 @@
-<p>This is the user/register view.</p>
+<div ng-app="angularApp" class='container-fluid typeahead-demo' ng-controller="UserRegisterCtrl">
+
+  <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="3000">
+    {{alert.msg}}
+  </uib-alert>
+
+  <h4>Ajout d'un utilisateur</h4>
+
+  <form class="simple-form">
+    <div class="row">
+      <div class="col-md-6">
+        <label>Nom : </label>
+        <input type="text" ng-model="user.nom" class="form-control" required>
+      </div>
+      <div class="col-md-6">
+        <label>Prénom : </label>
+        <input type="text" ng-model="user.prenom" class="form-control" required>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <label>Date de naissance : </label>
+
+        <input type="text" class="form-control" uib-datepicker-popup is-open="popup2.opened"
+               ng-required="true" ng-model="user.date_naissance" close-text="Fermer"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i
+                  class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+      </div>
+    </div>
+    <br/>
+    <input type="button" class="btn btn-danger" ng-click="reset()" value="Reset"/>
+    <input type="submit" class="btn btn-info" ng-click="register()" value="Enregistrer"/>
+  </form>
+</div>
