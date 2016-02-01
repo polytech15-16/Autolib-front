@@ -26,7 +26,7 @@ angular.module('angularApp')
 
       $http({
         url: 'http://localhost:3000/api/client',
-        method: "PUT",
+        method: "POST",
         dataType: 'json',
         contentType: "application/json",
         data: client,
