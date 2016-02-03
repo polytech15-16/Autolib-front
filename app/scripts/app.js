@@ -30,11 +30,23 @@ angular.module('angularApp', [
         controller: 'StationsCtrl',
         controllerAs: 'stations'
       })
+      /* all vehicules routes */
       .when('/vehicules', {
-        templateUrl: 'views/vehicules.html',
+        templateUrl: 'views/vehicules/view.html',
         controller: 'VehiculesCtrl',
         controllerAs: 'vehicules'
       })
+      .when('/vehicules/new', {
+        templateUrl: 'views/vehicules/new.html',
+        controller: 'VehiculesCtrl',
+        controllerAs: 'vehicules'
+      })
+      .when('/vehicules/edit/:id', {
+        templateUrl: 'views/vehicules/edit.html',
+        controller: 'VehiculesCtrl',
+        controllerAs: 'vehicules'
+      })
+      /* ***************** */
       .when('/clients', {
         templateUrl: 'views/clients.html',
         controller: 'ClientsCtrl',

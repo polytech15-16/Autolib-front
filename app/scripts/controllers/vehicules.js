@@ -7,14 +7,116 @@
  * # VehiculesCtrl
  * Controller of the angularApp
  */
-angular.module('angularApp')
-  .controller('VehiculesCtrl', function ($scope, $http) {
-    $http({
-      url: 'http://localhost:3000/api/vehicules',
-      method: "GET",
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    })
-      .then(function (response) {
+ var vehiculesApp = angular.module('angularApp');
+
+ vehiculesApp.controller('VehiculesCtrl', function ($scope, $http, $routeParams, $location) {
+
+    // initial value of creation/edition vehicule form
+    $scope.vehicule = {};
+
+    // reinitialize form
+    $scope.reset = function() {
+      $scope.vehicule = {
+        RFID: '',
+        Disponibilite: '',
+        etatBatterie: '',
+        latitude: '',
+        longitude: '',
+        type_vehicule: '',
+      };
+    };
+
+    $scope.create = function(vehicule){
+      $http({
+        url: 'http://localhost:3000/api/vehicules',
+        method: "POST",
+        dataType: 'JSON',
+        headers: {'Content-Type': 'application/json'},
+        data: vehicule
+      }).then(function (response) {
+        if (response.data.status) {
+          myAlert("Véhicule créé avec succès", "success");
+        } else {
+          $scope.errors = response.data.data;
+          myAlert(response.data.data, "danger");
+        }
+      });
+    };
+
+    // Return a specific contact for edition
+    $scope.edit = function(){
+      var id = $routeParams.id;
+    };
+
+    // update a vehicule
+    $scope.update = function(vehicule) {
+      $http({
+        url: 'http://localhost:3000/api/vehicules/'+vehicule.idVehicule,
+        method: "PUT",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        data: vehicule
+      }).then(function (response) {
+        if (response.data.status) {
+
+        } else {
+          $scope.errors = response.data.data;
+        }
+      });
+    };
+
+    // save a vehicule
+    $scope.save = function(vehicule){
+      if(typeof vehicule.idVehicule !== 'undefined'){
+        $scope.update(vehicule);
+      } else {
+        $scope.create(vehicule);
+      }
+      $scope.reset();
+      $location.path('/vehicules');
+    };
+
+    $scope.delete = function(id, confirmation){
+      confirmation = (typeof confirmation !== 'undefined') ? confirmation : true;
+      if (confirmDelete(confirmation, id)) {
+        $http({
+          url: 'http://localhost:3000/api/vehicules/'+id,
+          method: "DELETE",
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        }).then(function (response) {
+          if (response.data.status) {
+            return true;
+          } else {
+            $scope.errors = response.data.data;
+            return false;
+          }
+        });
+      }
+    };
+
+    var confirmDelete = function(confirmation, id){
+      return confirmation ? confirm('This action is irreversible. Do you want to delete vehicule n°' + id + ' ?') : true;
+    };
+
+
+    $scope.init = function(){
+      // on va chercher les types de véhicules
+          $http({
+        url: 'http://localhost:3000/api/type_vehicules',
+        method: "GET",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }).then(function (response) {
+        if (response.data.status) {
+          $scope.types_vehicule = response.data.data;
+        }
+      });
+
+      // on va chercher les véhicules et on crée la map
+      $http({
+        url: 'http://localhost:3000/api/vehicules',
+        method: "GET",
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      }).then(function (response) {
+
         if (response.data.status) {
 
           var mapOptions = {
@@ -24,19 +126,17 @@ angular.module('angularApp')
           }
 
           $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
           $scope.markers = [];
           $scope.infos = [];
 
           var infoWindow = new google.maps.InfoWindow();
 
-          var createMarker = function (info) {
-
+          var createMarker = function (info, img) {
             var marker = new google.maps.Marker({
               map: $scope.map,
               position: new google.maps.LatLng(info.lat, info.long),
               title: info.city,
-              icon: '../images/marker.png'
+              icon: img
             });
             marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
 
@@ -49,7 +149,6 @@ angular.module('angularApp')
           }
 
           var i = 0;
-          console.log(response.data.data);
           //Pour chaque vehicule, on créer un marker sur la map
           for (i = 0; i < response.data.data.length; i++) {
             var id = response.data.data[i].idVehicule;
@@ -61,7 +160,13 @@ angular.module('angularApp')
               lat: response.data.data[i].latitude,
               long: response.data.data[i].longitude,
             };
-            createMarker(city);
+            var img;
+            if(response.data.data[i].Disponibilite === "LIBRE"){
+              img = '../images/marker1.png';
+            } else {
+              img = '../images/marker2.png';
+            }
+            createMarker(city, img);
 
             var info = [];
             info.id = id;
@@ -74,17 +179,20 @@ angular.module('angularApp')
             $scope.infos.push(info);
           }
 
-
           $scope.openInfoWindow = function (e, selectedMarker) {
             e.preventDefault();
             google.maps.event.trigger(selectedMarker, 'click');
           }
-        }
-        else {
+
+        } else {
           $scope.errors = response.data.data;
         }
       },
       function (response) { // Failure : On n'arrive pas à appeler le webservice
-        $scope.errors = response;
-      });
-  });
+      $scope.errors = response;
+    });
+};
+
+$scope.init();
+
+});
