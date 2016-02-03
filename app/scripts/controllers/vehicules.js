@@ -84,10 +84,11 @@
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).then(function (response) {
           if (response.data.status) {
-            return true;
+            $scope.init();
+            myAlert("Véhicule supprimé avec succès", "success");
           } else {
             $scope.errors = response.data.data;
-            return false;
+            myAlert(response.data.data, "danger");
           }
         });
       }
