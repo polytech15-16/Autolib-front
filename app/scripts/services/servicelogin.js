@@ -3,7 +3,6 @@ function authInterceptor(API, auth) {
     // automatically attach Authorization header
     request: function (config) {
       var token = auth.getToken();
-      console.log(token);
       if (config.url.indexOf(API) === 0 && token) {
         config.headers.Authorization = 'Bearer ' + token;
       }
@@ -13,7 +12,7 @@ function authInterceptor(API, auth) {
 
     // If a token was sent back, save it
     response: function (res) {
-      if (res.data.status) {
+      if (res.data.status && res.data.token != null) {
         auth.saveToken(res.data.token);
       }
       return res;
@@ -31,7 +30,9 @@ function authService($window, $cookies) {
   }
 
   self.saveToken = function (token) {
-    $cookies.put('token', token);
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() + 1);
+    $cookies.put('token', token, {'expires': expireDate});
   }
 
   self.getToken = function () {

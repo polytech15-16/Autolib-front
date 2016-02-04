@@ -14,9 +14,6 @@ angular.module('angularApp')
 
     function handleRequest(res) {
       var token = res.data ? res.data.token : null;
-      if (token) {
-        console.log('JWT:', token);
-      }
       self.message = res.data.message;
     };
 
