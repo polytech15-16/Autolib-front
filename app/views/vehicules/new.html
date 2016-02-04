@@ -1,0 +1,39 @@
+<div ng-app="angularApp" ng-controller="VehiculesCtrl">
+
+	<h1>Ajout d'un Véhicule</h1>
+
+	<form role="form" class="clearfix" name="AjoutVehicule" data-ng-submit="save(vehicule)">
+		<fieldset>
+			<input type="hidden" name="idVehicule" type="number" data-ng-model="vehicule.idVehicule"/>
+
+			<label for="RFID">RFID</label>
+			<input id="RFID" class="form-control" type="number" name="RFID" required data-ng-model="vehicule.RFID" ng-init="vehicule.RFID=1234567899"/>
+
+			<label for="etatBatterie">etatBatterie</label>
+			<input id="etatBatterie" class="form-control" type="number" max="100" min="0" name="etatBatterie" data-ng-model="vehicule.etatBatterie" ng-init="vehicule.etatBatterie=100" />
+
+			<label for="Disponibilite">Disponibilite</label>
+			<select id="Disponibilite" class="form-control" type="text" name="Disponibilite" required data-ng-model="vehicule.Disponibilite" ng-init="vehicule.Disponibilite='LIBRE'">
+				<option>LIBRE</option>
+				<option>OCCUPE</option>
+			</select>
+
+			<label for="latitude">latitude</label>
+			<input id="latitude" class="form-control" type="number" step="any" name="latitude" data-ng-model="vehicule.latitude" ng-init="vehicule.latitude=45.767139"/>
+
+			<label for="longitude">longitude</label>
+			<input id="longitude" class="form-control" type="number" step="any" name="longitude" data-ng-model="vehicule.longitude" ng-init="vehicule.longitude=4.833873"/>
+
+			<label for="type_vehicule">type_vehicule</label>
+			<select id="type_vehicule" class="form-control" type="number" name="idType_vehicule" required data-ng-model="vehicule.idType_vehicule" ng-init="vehicule.idType_vehicule=6">
+				<option ng-repeat="type in types_vehicule" value="{{type.idType_vehicule}}">{{type.type_vehicule}}</option>
+			</select>
+
+			<br/>
+			<div class="text-center">
+				<input type="submit" class="btn btn-success btn-outline" value="OK"/>
+				<a class="btn btn-danger btn-outline" href="#/vehicules">Annuler</a>
+			</div>
+		</fieldset>
+	</form>
+</div>
