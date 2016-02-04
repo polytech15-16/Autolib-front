@@ -1,4 +1,5 @@
 <div ng-app="angularApp" ng-controller="StationsCtrl">
+
   <div id="map"></div>
 
   <div class="legend">
@@ -11,13 +12,18 @@
   <div ng-show="nearestStation != null">
     <div class="station well">
       <h1>Station la plus proche</h1>
-      <h3><a href="#" ng-click="openInfoWindow($event, nearestStation)">{{nearestStation.station.idStation}} - {{nearestStation.station.ville}}</a></h3>
+
+      <h3><a href="#" ng-click="openInfoWindow($event, nearestStation)">{{nearestStation.station.idStation}} -
+        {{nearestStation.station.ville}}</a></h3>
       {{nearestStation.station.adresse}}<br>
       {{nearestStation.station.code_postal}} {{nearestStation.station.ville}}
       <hr>
       <h4>Bornes</h4>
+
       <div class="list-group" ng-repeat="borne in nearestStation.station.Bornes | orderBy : 'etatBorne'">
-        <li ng-if="!borne.etatBorne">{{borne.idBorne}} : Occupée <a href="">Véhicule ({{borne.idVehicule}})</a></li>
+        <li ng-if="!borne.etatBorne">{{borne.idBorne}} : Occupée <a href="">Véhicule ({{borne.idVehicule}})</a>
+          <a class="btn btn-info" ng-click="reserver(borne.idVehicule)" >Réserver</a>
+        </li>
         <li ng-if="borne.etatBorne">{{borne.idBorne}} : Libre</li>
       </div>
     </div>

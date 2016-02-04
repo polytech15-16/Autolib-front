@@ -1,13 +1,35 @@
 <div class="user-container" id="top">
   <h1>Liste des clients enregistrés</h1>
   <!-- <ul class="clients"> -->
-    <div class="well" ng-repeat="c in clients track by $index">
-      <div class="row">
-        <div class="col-md-8">
-          <a ng-href="#/clients/{{c.idClient}}"><h4>{{c.nom}} {{c.prenom}}</h4></a>
-          date de naissance : <span class="glyphicon glyphicon-calendar"></span> <span class="date" ng-bind="c.date_naissance | date:'dd/MM/yyyy'"></span><br/>
+  <div class="well" ng-repeat="c in clients track by $index">
+    <div class="row">
+      <div class="col-md-12">
+        <a ng-href="#/clients/{{c.idClient}}"><h4>{{c.nom}} {{c.prenom}}</h4></a>
+        Date de naissance : <span class="glyphicon glyphicon-calendar"></span> <span class="date"
+                                                                                     ng-bind="c.date_naissance | date:'dd/MM/yyyy'"></span><br/>
+
+        <div ng-if="c.Reservations">
+          <h4>Réservations : </h4>
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>Date échéance</th>
+              <th>Date réservation</th>
+              <th>Véhicule</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="res in c.Reservations">
+              <td>{{res.date_echeance}}</td>
+              <td>{{res.date_reservation}}</td>
+              <td>{{res.vehicule}}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
+
       </div>
     </div>
+  </div>
   <!-- </ul> -->
 </div>

@@ -8,7 +8,26 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('StationsCtrl', function ($scope, $http, $location, $anchorScroll, $geolocation) {
+  .controller('StationsCtrl', function ($scope, $http, $location, $anchorScroll, $geolocation, $cookies) {
+    $scope.reserver = function (idVehicule) {
+      $http({
+        url: 'http://localhost:3000/api/reservations?idVehicule='+idVehicule+'&token='+$cookies.get('token'),
+        method: "GET",
+        dataType: 'json',
+        //contentType: "application/json",
+        headers: {'Content-Type': 'application/json'},
+      })
+        .then(function successCallback(response) {
+          if(response.data.status){
+            myAlert("Le véhicule a bien été reservé !", "success");
+          }else{
+            myAlert("Problème de réservation, veuillez ré-essayer.", "error");
+          }
+        }, function errorCallback(response) {
+          myAlert("Problème de réservation, veuillez ré-essayer.", "error");
+        });
+    };
+
     //Récupère les informations sur les stations
     $http({
       url: 'http://localhost:3000/api/stations',

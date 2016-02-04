@@ -2,9 +2,11 @@ function authInterceptor(API, auth) {
   return {
     // automatically attach Authorization header
     request: function (config) {
+      console.log("hgrijegiroghrioeriogg");
       var token = auth.getToken();
+      console.log(token);
       if (config.url.indexOf(API) === 0 && token) {
-        config.headers.Authorization = 'Bearer ' + token;
+        config.headers.Authorization = 'token : ' + token;
       }
 
       return config;

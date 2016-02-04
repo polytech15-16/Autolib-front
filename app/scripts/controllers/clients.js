@@ -17,6 +17,7 @@ angular.module('angularApp')
       .then(function (response) {//Appel webservice reussi
         if (response.data.status) {//On a les résultat
           $scope.clients = response.data.data;
+          console.log(response.data.data);
         }
         else {//On n'obtient pas résultat
           $scope.errors = response.data.data;
