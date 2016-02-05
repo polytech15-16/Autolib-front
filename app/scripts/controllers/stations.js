@@ -9,6 +9,11 @@
  */
 angular.module('angularApp')
   .controller('StationsCtrl', function ($scope, $http, $location, $anchorScroll, $geolocation, $cookies) {
+    if($cookies.get('token') != null){
+      $scope.identified = true;
+    }else{
+      $scope.identified = false;
+    }
     $scope.reserver = function (idVehicule) {
       $http({
         url: 'http://localhost:3000/api/reservations?idVehicule='+idVehicule+'&token='+$cookies.get('token'),

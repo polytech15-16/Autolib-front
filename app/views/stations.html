@@ -22,7 +22,8 @@
 
       <div class="list-group" ng-repeat="borne in nearestStation.station.Bornes | orderBy : 'etatBorne'">
         <li ng-if="!borne.etatBorne">{{borne.idBorne}} : Occupée <a href="">Véhicule ({{borne.idVehicule}})</a>
-          <a class="btn btn-info" ng-click="reserver(borne.idVehicule)" >Réserver</a>
+          <a ng-show="identified" class="btn btn-info" ng-click="reserver(borne.idVehicule)" >Réserver</a>
+          <a ng-show="!identified" class="btn btn-info" href="/#/user/login" >Réserver</a>
         </li>
         <li ng-if="borne.etatBorne">{{borne.idBorne}} : Libre</li>
       </div>
