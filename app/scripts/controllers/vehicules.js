@@ -44,9 +44,17 @@
     };
 
     // Return a specific contact for edition
-    $scope.edit = function(){
-      var id = $routeParams.id;
-    };
+    // $scope.edit = function(){
+    //   console.log("ici");
+    //   $http({
+    //     url: 'http://localhost:3000/api/vehicules/'+$routeParams.id,
+    //     method: "GET",
+    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //   }).then(function (res) {
+    //     console.log(res.data.data);
+    //     $scope.vehicule = res.data.data;
+    //   });
+    // };
 
     // update a vehicule
     $scope.update = function(vehicule) {

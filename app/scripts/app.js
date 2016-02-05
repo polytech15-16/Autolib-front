@@ -44,7 +44,8 @@ angular.module('angularApp', [
       .when('/vehicules/edit/:id', {
         templateUrl: 'views/vehicules/edit.html',
         controller: 'VehiculesCtrl',
-        controllerAs: 'vehicules'
+        // method: 'edit',
+        controllerAs: 'vehicules',
       })
       /* ***************** */
       .when('/clients', {
